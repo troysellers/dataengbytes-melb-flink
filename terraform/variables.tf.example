@@ -1,0 +1,50 @@
+variable aiven_api_token {
+	type = string
+	default = "<YOUR API TOKEN>"	
+	description = "Aiven authentication token"
+}
+
+variable aiven_user_email {
+	type = string
+	default = "troy.sellers@aiven.io"
+	description = "The user email that owns the api token"
+}
+
+variable aiven_project_name {
+	type = string
+	default = "<YOUR AIVEN PROJECT>"	
+	description = "Aiven project for resource creation"
+}
+
+variable aiven_cloud { 
+	type = string
+	default = "aws-ap-southeast-2"
+	description = "Cloud region for Aiven resources"
+}
+
+variable service_prefix {
+	type = string
+	default = "flink-demo-"
+	description = "String prefix for service names" 
+}
+variable pg_plan {
+	type = string
+	default = "startup-4"
+	description = "The Aiven postgres plan to create"
+} 
+variable kafka_plan {
+	type = string
+	default = "business-4"
+	description = "The Aiven Kafka plan to create"
+} 
+variable kafka_topic {
+	type = string
+	default = "cpu_load_stats_real"
+	description = "the topic name for the incoming kafka data"
+}
+
+variable flink_plan {
+	type = string
+	default = "business-4"
+	description = "The Aiven Flink plan to create"
+}
