@@ -1,6 +1,6 @@
 # DataEngBytes - Anomaly Detection using Flink
 
-This is a repostory that supports the presentation I gave at the [DataEngBytes](https://dataengconf.com.au/session/499225?apiUrl=https://sessionize.com/api/v2/2gv8oeqy/view/All) conference in Melbourne.
+This is a repostory that supports the presentation I gave at the [DataEngBytes](https://dataengconf.com.au/session/499225?apiUrl=https://sessionize.com/api/v2/2gv8oeqy/view/All) conference in Melbourne. It is basically a rip off from this [tutorial](https://docs.aiven.io/docs/tutorials/anomaly-detection#) created by the wonderful Aiven DevRel team!  
 
 This repository is a list of resources that was enumerated in the slides, with a small terraform script for those who don't feel like clicking the buttons. 
 
@@ -10,6 +10,12 @@ The conference talk was built using
 * Aiven for Apache Flink [documentation](https://docs.aiven.io/docs/products/flink)
 * Aiven Flink anomaly detection [tutorial](https://docs.aiven.io/docs/tutorials/anomaly-detection)
 * Aiven Terraform [provider](https://registry.terraform.io/providers/aiven/aiven/latest/docs) 
+
+## Required Things
+* [Terraform](https://developer.hashicorp.com/terraform/downloads) installed
+* Having psql on your path (probably an install of [Postgres](https://www.postgresql.org/download/) - this was 15)
+* It might be handy to have the [Aiven CLI](https://docs.aiven.io/docs/tools/cli) (but not necessary)
+* Courage...
 
 ## To Build
 * Create yourself an [Aiven account](https://console.aiven.io/signup?credit_code=debmelb-23). Free trials are available
