@@ -54,3 +54,10 @@ If you like what you see, go ahead and deploy
 ```
 > terraform deploy
 ```
+
+Once deployed, run some data into it by 
+
+```
+> cd ../
+> ./buildAndRun.sh
+```
