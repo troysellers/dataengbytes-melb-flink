@@ -6,7 +6,7 @@ terraform {
     }
   }
 }
-
+# https://registry.terraform.io/providers/aiven/aiven/latest/docs
 provider "aiven" {
   api_token = var.aiven_api_token
 }

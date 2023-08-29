@@ -256,7 +256,7 @@ resource "aiven_flink_application_version" "notifications_v1" {
     statement = <<EOT
         INSERT INTO SLACK_SINK
         SELECT
-            '<CHANNEL_ID>', 
+            '${var.slack_channel_id}', 
             'host:' || CPU.hostname || 
             ' CPU: ' || cpu || 
             ' avg CPU value:' ||  TRY_CAST(usage_avg as string) || 

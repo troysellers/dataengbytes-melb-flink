@@ -71,6 +71,12 @@ variable grafana_plan{
 
 variable slack_api_token {
 	type = string
-	default = "<your slack api token>"
+	default = "<your slack api token>" # https://github.com/Aiven-Open/slack-connector-for-apache-flink#set-up-slack-application
 	description = "Slack API token for alerting"
+}
+
+variable slack_channel_id {
+	type = string
+	default = "<channel id>"
+	description = "Channel ID that receives slack notfications"
 }
