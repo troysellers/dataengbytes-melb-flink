@@ -1,50 +1,76 @@
 variable aiven_api_token {
 	type = string
-	default = "<YOUR API TOKEN>"	
+	default = "<aiven api token>" # https://docs.aiven.io/docs/platform/concepts/authentication-tokens
 	description = "Aiven authentication token"
 }
-
 variable aiven_user_email {
 	type = string
-	default = "troy.sellers@aiven.io"
+	default = "<aiven username>" # https://docs.aiven.io/docs/platform/howto/manage-org-users
 	description = "The user email that owns the api token"
 }
 
 variable aiven_project_name {
 	type = string
-	default = "<YOUR AIVEN PROJECT>"	
+	default = "<aiven project>"	# https://docs.aiven.io/docs/platform/howto/manage-project
 	description = "Aiven project for resource creation"
 }
 
 variable aiven_cloud { 
 	type = string
-	default = "aws-ap-southeast-2"
+	default = "<cloud region>" # https://docs.aiven.io/docs/platform/reference/list_of_clouds
 	description = "Cloud region for Aiven resources"
 }
 
 variable service_prefix {
 	type = string
-	default = "flink-demo-"
+	default = "flink-demo"
 	description = "String prefix for service names" 
 }
 variable pg_plan {
 	type = string
-	default = "startup-4"
+	default = "startup-4" # https://aiven.io/pricing?product=pg
 	description = "The Aiven postgres plan to create"
 } 
 variable kafka_plan {
 	type = string
-	default = "business-4"
+	default = "business-4" # https://aiven.io/pricing?product=kafka
 	description = "The Aiven Kafka plan to create"
 } 
-variable kafka_topic {
+variable kafka_topic_filtering_in {
 	type = string
 	default = "cpu_load_stats_real"
-	description = "the topic name for the incoming kafka data"
+	description = "the topic name for the incoming kafka data from fake generator"
 }
-
+variable kafka_topic_filtering_out {
+	type = string
+	default = "cpu_load_stats_real_filter"
+	description = "the topic name for the sink on v1 filtering Flink app"
+}
+variable kafka_topic_aggregation_out {
+	type = string
+	default = "cpu_load_stats_aggregated"
+	description = "the topic name for the sink on v1 filtering Flink app"
+}
 variable flink_plan {
 	type = string
-	default = "business-4"
+	default = "business-4" # hhttps://aiven.io/pricing?product=flink
 	description = "The Aiven Flink plan to create"
+}
+
+variable influx_plan {
+	type = string
+	default = "startup-4" # https://aiven.io/pricing?product=influxdb
+	description = "The Aiven Influx plan to create"
+}
+
+variable grafana_plan{
+	type = string
+	default = "startup-1" # https://aiven.io/pricing?product=grafana
+	description = "value for the grafana plan"
+}
+
+variable slack_api_token {
+	type = string
+	default = "<your slack api token>"
+	description = "Slack API token for alerting"
 }
