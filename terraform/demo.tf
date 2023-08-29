@@ -262,12 +262,12 @@ resource "aiven_flink_application_version" "notifications_v1" {
             ' avg CPU value:' ||  TRY_CAST(usage_avg as string) || 
             ' over the threshold ' || TRY_CAST(allowed_top as string)
         FROM CPU_IN_AGG CPU INNER JOIN CPU_THRESHOLDS
-        ON CPU.hostname = CPU_THRESHOLDS.hostname 
+            ON CPU.hostname = CPU_THRESHOLDS.hostname 
         WHERE usage_avg > allowed_top
     EOT
     source {
         create_table = <<EOT
-            CREATE TABLE CPU_IN_AGG(
+            CREATE TABLE CPU_IN_AGG (
                 window_start TIMESTAMP(3),
                 window_end TIMESTAMP(3),
                 hostname STRING,
@@ -287,10 +287,10 @@ resource "aiven_flink_application_version" "notifications_v1" {
     }
    source {
     create_table = <<EOT
-        CREATE TABLE CPU_THRESHOLDS(
-        hostname STRING,
-        allowed_top INT,
-        PRIMARY KEY (hostname) NOT ENFORCED
+        CREATE TABLE CPU_THRESHOLDS (
+            hostname STRING,
+            allowed_top INT,
+            PRIMARY KEY (hostname) NOT ENFORCED
         )
         WITH (
             'connector' = 'jdbc',
@@ -307,11 +307,10 @@ resource "aiven_flink_application_version" "notifications_v1" {
                 message STRING
             ) WITH (
                 'connector' = 'slack',
-                'token' = '${var.slack_api_token}',
+                'token' = '${var.slack_api_token}'
             )
         EOT
     }
-
 }
 
 # flink job 3 application deployment
