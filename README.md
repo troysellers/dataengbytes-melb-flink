@@ -16,7 +16,8 @@ The conference talk was built using
 * Create the [authentication token](https://console.aiven.io/signup?credit_code=debmelb-23) 
 * Run the [terraform script](#terraform)
 * Build and run the [data generator](https://console.aiven.io/signup?credit_code=debmelb-23)
-````
+  
+```
 > docker build -t fake-data-producer-for-apache-kafka-docker .
 
 > docker run fake-data-producer-for-apache-kafka-docker
