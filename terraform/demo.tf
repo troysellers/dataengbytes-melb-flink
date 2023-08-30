@@ -254,10 +254,9 @@ resource "aiven_flink_application_version" "notifications_v1" {
     service_name = aiven_flink.flink.service_name
     application_id = aiven_flink_application.notifications_v1.application_id
     statement = <<EOT
-        INSERT INTO SLACK_SINK
+        INSERT INTO CPU_ALERTS
         SELECT
-            '${var.slack_channel_id}', 
-            'host:' || CPU.hostname || 
+            CPU.hostname,
             ' CPU: ' || cpu || 
             ' avg CPU value:' ||  TRY_CAST(usage_avg as string) || 
             ' over the threshold ' || TRY_CAST(allowed_top as string)
@@ -302,14 +301,18 @@ resource "aiven_flink_application_version" "notifications_v1" {
    } 
     sink {
         create_table = <<EOT
-           create table SLACK_SINK (
-                channel_id STRING,
+           create table CPU_ALERTS (
+                hostname STRING,
                 message STRING
             ) WITH (
-                'connector' = 'slack-connector',
-                'token' = '${var.slack_api_token}'
+                'connector' = 'kafka',
+                'properties.bootstrap.servers' = '',
+                'topic' = '${var.kafka_topic_cpu_alerts}',
+                'value.format' = 'json',
+                'scan.startup.mode' = 'earliest-offset'
             )
         EOT
+        integration_id = aiven_service_integration.flink_integration_kafka.integration_id
     }
 }
 
