@@ -22,7 +22,7 @@ resource "aiven_kafka" "kafka-service" {
     kafka_rest      = true
     schema_registry = false
     kafka {
-      auto_create_topics_enable    = true
+      auto_create_topics_enable = true
     }
   }
 }
@@ -158,7 +158,7 @@ resource "aiven_flink_application_deployment" "filtering_v1_deployment" {
   project = var.aiven_project_name
   service_name = aiven_flink.flink.service_name
   version_id = aiven_flink_application_version.filtering_v1.application_version_id
-  parallelism = 1
+  parallelism = 2
 }
 
 ###### Flink App 2
@@ -238,7 +238,7 @@ resource "aiven_flink_application_deployment" "windowing_v1_deployment" {
   project = var.aiven_project_name
   service_name = aiven_flink.flink.service_name
   version_id = aiven_flink_application_version.windowing_v1.application_version_id
-  parallelism = 1
+  parallelism = 2
 }
 
 
@@ -306,7 +306,7 @@ resource "aiven_flink_application_version" "notifications_v1" {
                 channel_id STRING,
                 message STRING
             ) WITH (
-                'connector' = 'slack',
+                'connector' = 'slack-connector',
                 'token' = '${var.slack_api_token}'
             )
         EOT
@@ -319,7 +319,7 @@ resource "aiven_flink_application_deployment" "notifications_deployment" {
   project = var.aiven_project_name
   service_name = aiven_flink.flink.service_name
   version_id = aiven_flink_application_version.notifications_v1.application_version_id
-  parallelism = 1
+  parallelism = 2
 }
 
 
