@@ -2,8 +2,8 @@
 . conf/env.conf
 
 # Get repository
-git clone https://github.com/aiven/python-fake-data-producer-for-apache-kafka.git
-pip install -r python-fake-data-producer-for-apache-kafka/requirements.txt
+#git clone https://github.com/aiven/python-fake-data-producer-for-apache-kafka.git
+#pip install -r python-fake-data-producer-for-apache-kafka/requirements.txt
 #pip install aiven-client
 
 # Get Hostname and Port
@@ -17,8 +17,8 @@ if [ $PRIVATELINK == "YES" ]; then
 fi
 
 # Get Certificates
-rm -rf ./certs
-avn --auth-token $TOKEN service user-creds-download $SERVICE_NAME  --project $PROJECT_NAME --username avnadmin -d ./certs
+#rm -rf ./certs
+#avn --auth-token $TOKEN service user-creds-download $SERVICE_NAME  --project $PROJECT_NAME --username avnadmin -d ./certs
 
 # Create topic
 #avn --auth-token $TOKEN service topic-create $SERVICE_NAME $TOPIC --project $PROJECT_NAME --partitions $PARTITIONS --replication $REPLICATION

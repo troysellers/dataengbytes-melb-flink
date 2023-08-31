@@ -1,3 +1,7 @@
 .DS_Store
 flink/
 python-fake-data-producer-for-apache-kafka/
+kafkaCreds/ssl.properties
+kafkaCreds/client.*
+kafkaCreds/ca.pem
+kafkaCreds/service.*

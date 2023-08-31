@@ -391,3 +391,36 @@ resource "aiven_service_integration" "grafana_dash_integration" {
   source_service_name      = aiven_grafana.grafana.service_name
   destination_service_name = aiven_influxdb.influxdb.service_name
 }
+
+resource "local_sensitive_file" "ssl-props" {
+    content = <<EOF
+security.protocol=SSL
+ssl.truststore.location=${abspath(path.module)}/../kafkaCreds/client.truststore.jks
+ssl.truststore.password=${var.kafka_truststore_password}
+ssl.keystore.location=${abspath(path.module)}/../kafkaCreds/client.keystore.p12   
+ssl.keystore.password=${var.kafka_truststore_password}
+ssl.key.password=${var.kafka_truststore_password}
+    EOF
+    filename = "${abspath(path.module)}/../kafkaCreds/ssl.properties"
+    file_permission = 0744 
+}
+
+
+resource "local_sensitive_file" "runConsumer" {
+    content = <<EOF
+        #!/bin/bash
+        
+        cd /Users/troysellers/projects/tools/kafka-3.5.1/bin
+        ./kafka-console-consumer.sh --bootstrap-server ${aiven_kafka.kafka-service.service_uri} --topic ${var.kafka_topic_cpu_alerts} --consumer.config ${abspath(path.module)}/../kafkaCreds/client.properties
+    EOF
+    filename = "${abspath(path.module)}/../startConsumer.sh"
+    file_permission = 0744 
+}
+
+resource "null_resource" "get_kafka_creds" {
+    depends_on = [ aiven_kafka.kafka-service ]
+
+    provisioner "local-exec" {
+        command = "avn service user-kafka-java-creds --project ${var.aiven_project_name} --username avnadmin --password ${var.kafka_truststore_password} -d ${abspath(path.module)}/../kafkaCreds ${aiven_kafka.kafka-service.service_name}"
+    }
+}
